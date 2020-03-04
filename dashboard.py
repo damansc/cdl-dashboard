@@ -7,19 +7,18 @@ import dash_bootstrap_components as dbc
 import datetime as dt
 import pandas as pd
 import plotly.express as px
-
 import os
 import pandas as pd
 
 
 
-data_files = os.listdir('./data')
+data_files = os.listdir('data/')
 dates = [x[5:15] for x in data_files]
 
 meta_data = pd.DataFrame()
 for x in data_files:
         games = ['IW', 'WW2', 'Bo4', 'MW']
-        temp1 = pd.read_csv('./data/{}'.format(x))
+        temp1 = pd.read_csv('data/{}'.format(x))
         date = pd.to_datetime(x[5:15])
         if date <= pd.to_datetime('2017-08-13'):
             temp1['game'] = games[0]
@@ -33,7 +32,7 @@ for x in data_files:
         temp1['event'] = event
         meta_data = meta_data.append(temp1, ignore_index = True)
 
-meta_data.to_csv('./outputs/meta_data.csv')
+meta_data.to_csv('outputs/meta_data.csv')
 
 stat_rm_ls = ['game', 'match id', 'series id', 'end time', 
               'mode', 'map', 'team', 'player']
